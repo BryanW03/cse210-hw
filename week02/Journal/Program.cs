@@ -7,13 +7,12 @@ using System.IO;
 // 2. Implemented graceful error handling when trying to load a file that doesn't exist, preventing crashes.
 // 3. Used a robust custom separator ("~~|~~") to safely save and load files without breaking if the user types commas.
 
-
 public class Entry
 {
     public string Date { get; set; }
     public string PromptText { get; set; }
     public string EntryText { get; set; }
-    public string Mood { get; set; } 
+    public string Mood { get; set; }
 
     public void Display()
     {
@@ -72,7 +71,6 @@ public class Journal
         {
             foreach (Entry entry in _entries)
             {
-                
                 outputFile.WriteLine($"{entry.Date}~~|~~{entry.PromptText}~~|~~{entry.EntryText}~~|~~{entry.Mood}");
             }
         }
@@ -87,7 +85,7 @@ public class Journal
             return;
         }
 
-        _entries.Clear(); 
+        _entries.Clear();
         string[] lines = File.ReadAllLines(file);
 
         foreach (string line in lines)
@@ -108,8 +106,6 @@ public class Journal
         Console.WriteLine("Journal loaded successfully!\n");
     }
 }
-
-
 
 class Program
 {
@@ -139,7 +135,7 @@ class Program
                     Console.WriteLine($"\n{prompt}");
                     Console.Write("> ");
                     string response = Console.ReadLine();
-                    
+
                     Console.Write("What is your current mood? ");
                     string mood = Console.ReadLine();
 
@@ -153,23 +149,28 @@ class Program
                     myJournal.AddEntry(newEntry);
                     Console.WriteLine();
                     break;
+
                 case "2":
                     Console.WriteLine();
                     myJournal.DisplayAll();
                     break;
+
                 case "3":
                     Console.Write("What is the filename? ");
                     string loadFile = Console.ReadLine();
                     myJournal.LoadFromFile(loadFile);
                     break;
+
                 case "4":
                     Console.Write("What is the filename? ");
                     string saveFile = Console.ReadLine();
                     myJournal.SaveToFile(saveFile);
                     break;
+
                 case "5":
                     running = false;
                     break;
+
                 default:
                     Console.WriteLine("Invalid choice. Please try again.\n");
                     break;
